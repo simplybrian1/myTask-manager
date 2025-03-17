@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-orange-100 via-orange-200 to-orange-300 text-gray-900 dark:bg-gradient-to-r dark:from-gray-800 dark:via-gray-900 dark:to-black dark:text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-md dark:bg-gray-800">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-xl font-bold">Task Manager</a>
+            <div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" 
+                       class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" 
+                       class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Login</a>
+                    <a href="{% url 'register' %}" 
+                       class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition ml-2">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

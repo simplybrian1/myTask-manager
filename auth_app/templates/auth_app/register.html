@@ -1,0 +1,49 @@
+{% extends "auth_app/base.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-16 bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center">Register</h2>
+
+    <form method="post" class="mt-6 space-y-4">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                <label class="block text-gray-700 dark:text-gray-300 font-medium">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="text-red-500 text-sm">{{ field.errors.as_text }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit"
+            class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Register
+        </button>
+    </form>
+
+    <p class="mt-4 text-center text-gray-700 dark:text-gray-300">
+        Already have an account? 
+        <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login here</a>
+    </p>
+</div>
+
+<style>
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #333; /* Darker border */
+        border-radius: 6px;
+        background-color: white;
+        font-size: 16px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #1e40af; /* Blue focus effect */
+        box-shadow: 0 0 5px rgba(30, 64, 175, 0.5);
+    }
+</style>
+
+{% endblock %}
